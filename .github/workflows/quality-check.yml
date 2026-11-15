@@ -1,0 +1,15 @@
+name: 知识库质控校验
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 校验字段完整性 / 医案四段链 / 溯源行号 / 索引审计
+        run: python3 scripts/validate_skill.py --repo .
